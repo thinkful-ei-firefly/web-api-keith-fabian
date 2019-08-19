@@ -34,11 +34,22 @@ app.get('/lotto', (req, res) => {
     return res.status(400).send('Invalid request');
   }
   let inputs = req.query.arr;
-  let numbers = Array.from({length: 6}, () => Math.floor(Math.random() * 10));
   let match = 0;
 
+  let arr = [1,2,3,4,5,6,7,8,9,10];
+  let rand = [];
+  let j = 0;
+
+  for (let i = 0; i < 6; i++){
+    j = Math.floor(Math.random() * (arr.length));
+    rand.push(arr[j]);
+    arr.splice(j,1);
+  }
+  console.log(rand);
+  console.log(inputs);
+
   inputs.forEach(input => {
-      if (numbers.includes(parseInt(input))){
+      if (rand.includes(parseInt(input))){
         match++;
       }
     }
